@@ -70,15 +70,107 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class NewPage extends StatelessWidget {
+class NewPage extends StatefulWidget {
+  @override
+  _NewPageState createState() => _NewPageState();
+}
+
+class _NewPageState extends State<NewPage> {
+  TimeOfDay selectedTime = TimeOfDay.now();
+  Set<String> selectedCheckboxes = {"Home"};
+  TextEditingController otherTextFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('New Page'),
       ),
-      body: Center(
-        child: Text('Welcome to the new page!'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Time text field
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Select Time',
+            ),
+            onTap: () async {
+              final TimeOfDay? newTime = await showTimePicker(
+                context: context,
+                initialTime: selectedTime,
+              );
+              if (newTime != null) {
+                setState(() {
+                  selectedTime = newTime;
+                });
+              }
+            },
+          ),
+          // Checkboxes
+          Column(
+            children: [
+              CheckboxListTile(
+                title: Text('Home'),
+                value: selectedCheckboxes.contains('Home'),
+                onChanged: (value) {
+                  setState(() {
+                    if (value!) {
+                      selectedCheckboxes.add('Home');
+                    } else {
+                      selectedCheckboxes.remove('Home');
+                    }
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('Health Care facility'),
+                value: selectedCheckboxes.contains('Health Care facility'),
+                onChanged: (value) {
+                  setState(() {
+                    if (value!) {
+                      selectedCheckboxes.add('Health Care facility');
+                    } else {
+                      selectedCheckboxes.remove('Health Care facility');
+                    }
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('Public building'),
+                value: selectedCheckboxes.contains('Public building'),
+                onChanged: (value) {
+                  setState(() {
+                    if (value!) {
+                      selectedCheckboxes.add('Public building');
+                    } else {
+                      selectedCheckboxes.remove('Public building');
+                    }
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('Street/highway'),
+                value: selectedCheckboxes.contains('Street/highway'),
+                onChanged: (value) {
+                  setState(() {
+                    if (value!) {
+                      selectedCheckboxes.add('Street/highway');
+                    } else {
+                      selectedCheckboxes.remove('Street/highway');
+                    }
+                  });
+                },
+              ),
+            ],
+          ),
+          // Text field for others
+          TextField(
+            controller: otherTextFieldController,
+            decoration: InputDecoration(
+              labelText: 'Enter other',
+            ),
+          ),
+        ],
       ),
     );
   }
