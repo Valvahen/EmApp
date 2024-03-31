@@ -1,90 +1,85 @@
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
   @override
-  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _usernameController = TextEditingController();
-  String? _emailErrorText;
+  final _formKey = GlobalKey<FormState>();
+  String _username = '';
+  String _password = '';
+
+  void _login() {
+    if (_formKey.currentState!.validate()) {
+      // Navigate to the new page after successful login
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => NewPage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text('Login'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Form(
+        key: _formKey,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Email'),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                hintText: 'Enter your email',
-                errorText: _emailErrorText,
-              ),
+            TextFormField(
+              decoration: InputDecoration(labelText: 'Username'),
               onChanged: (value) {
-                if (value.isNotEmpty && !EmailValidator.validate(value)) {
-                  setState(() {
-                    _emailErrorText = 'Please enter a valid email address';
-                  });
-                } else {
-                  setState(() {
-                    _emailErrorText = null;
-                  });
+                setState(() {
+                  _username = value;
+                });
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter a username';
                 }
+                return null;
               },
             ),
-            const SizedBox(height: 16.0),
-            const Text('Username'),
-            TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                hintText: 'Enter your username',
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            const Text('Password'),
-            TextField(
-              controller: _passwordController,
+            TextFormField(
+              decoration: InputDecoration(labelText: 'Password'),
               obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Enter your password',
-              ),
+              onChanged: (value) {
+                setState(() {
+                  _password = value;
+                });
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter a password';
+                }
+                return null;
+              },
             ),
-            const SizedBox(height: 16.0),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  // Handle login logic here
-                },
-                child: const Text('Login'),
-              ),
+            ElevatedButton(
+              onPressed: _login,
+              child: Text('Login'),
             ),
           ],
         ),
       ),
     );
   }
+}
 
+class NewPage extends StatelessWidget {
   @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _usernameController.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('New Page'),
+      ),
+      body: Center(
+        child: Text('Welcome to the new page!'),
+      ),
+    );
   }
-
-  
 }
