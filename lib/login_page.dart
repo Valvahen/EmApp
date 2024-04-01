@@ -170,6 +170,7 @@ class _NewPageState extends State<NewPage> {
               labelText: 'Enter other',
             ),
           ),
+          ElevatedButton(onPressed: () {}, child: Text('Submit'))
         ],
       ),
     );
