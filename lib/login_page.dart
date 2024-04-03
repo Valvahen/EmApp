@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -170,8 +171,104 @@ class _NewPageState extends State<NewPage> {
               labelText: 'Enter other',
             ),
           ),
-          ElevatedButton(onPressed: () {}, child: Text('Submit'))
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => secondPage()));
+              },
+              child: Text('Next'))
         ],
+      ),
+    );
+  }
+}
+
+class secondPage extends StatefulWidget {
+  @override
+  _secondPageState createState() => _secondPageState();
+}
+
+class _secondPageState extends State<secondPage> {
+  String _selection = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Selection Page'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ListTile(
+              title: Text('Single'),
+              leading: Radio(
+                value: 'Single',
+                groupValue: _selection,
+                onChanged: (String? value) {
+                  setState(() {
+                    _selection = value!;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: Text('Multiple'),
+              leading: Radio(
+                value: 'Multiple',
+                groupValue: _selection,
+                onChanged: (String? value) {
+                  setState(() {
+                    _selection = value!;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: Text('Dead on arrival'),
+              leading: Radio(
+                value: 'Dead on arrival',
+                groupValue: _selection,
+                onChanged: (String? value) {
+                  setState(() {
+                    _selection = value!;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              title: Text('Mass casualty'),
+              leading: Radio(
+                value: 'Mass casualty',
+                groupValue: _selection,
+                onChanged: (String? value) {
+                  setState(() {
+                    _selection = value!;
+                  });
+                },
+              ),
+            ),
+             Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) => secondPage()));
+                },
+                child: Text('Next'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context); // Navigate back to the previous page
+                },
+                child: Text('Prev'),
+              ),
+            ],
+          ),
+          ],
+        ),
       ),
     );
   }
