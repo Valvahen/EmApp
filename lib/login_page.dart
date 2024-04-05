@@ -1,5 +1,4 @@
-import 'dart:html';
-import 'package:flutter/cupertino.dart';
+//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -616,93 +615,245 @@ class _AirwayPageState extends State<AirwayPage> {
   bool isJawThrust = false;
   bool isCervical = false;
   bool isSuctioning = false;
+
+  TextEditingController obstructedBy = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Airway Checkboxes'),
       ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Airway',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            CheckboxListTile(
+              title: Text('Patent'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isPatent,
+              onChanged: (value) {
+                setState(() {
+                  isPatent = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Threatened'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isThreatened,
+              onChanged: (value) {
+                setState(() {
+                  isThreatened = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Obstructed'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isObstructed,
+              onChanged: (value) {
+                setState(() {
+                  isObstructed = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Airway Manuever',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            CheckboxListTile(
+              title: Text('Head Tilt/Chin Lift'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isHeadTilt,
+              onChanged: (value) {
+                setState(() {
+                  isHeadTilt = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Jaw Thrust'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isJawThrust,
+              onChanged: (value) {
+                setState(() {
+                  isJawThrust = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Cervical'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isCervical,
+              onChanged: (value) {
+                setState(() {
+                  isCervical = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Suctioning'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isSuctioning,
+              onChanged: (value) {
+                setState(() {
+                  isSuctioning = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Text('Obstructed By:',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+            TextField(
+              controller: obstructedBy,
+              decoration: InputDecoration(
+                hintText: 'Enter text',
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BreathingPage()));
+                  },
+                  child: Text('Next'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(
+                        context); // Navigate back to the previous page
+                  },
+                  child: Text('Prev'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BreathingPage extends StatefulWidget {
+  @override
+  _BreathingPageState createState() => _BreathingPageState();
+}
+
+class _BreathingPageState extends State<BreathingPage> {
+  bool isLeft = false;
+  bool isRight = false;
+  bool isRibBinder = false;
+
+  TextEditingController oxygenController = TextEditingController();
+  TextEditingController chestNeedleTubeController = TextEditingController();
+
+  String selection = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Breathing'),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Airway',
+            'Spontaneous Respiration',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          ListTile(
+            leading: Radio(
+              value: "yes",
+              groupValue: selection,
+              onChanged: (String? value) {
+                setState(() {
+                  selection = value!;
+                });
+              },
+            ),
+            title: Text('Yes'),
+          ),
+          ListTile(
+            leading: Radio(
+              value: 'No',
+              groupValue: selection,
+              onChanged: (String? value) {
+                setState(() {
+                  selection = value!;
+                });
+              },
+            ),
+            title: Text('No'),
+          ),
+          SizedBox(height: 20),
+          Text(
+            'Breath Sounds',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           CheckboxListTile(
-            title: Text('Patent'),
+            title: Text('Left'),
             controlAffinity: ListTileControlAffinity.leading,
-            value: isPatent,
+            value: isLeft,
             onChanged: (value) {
               setState(() {
-                isPatent = value!;
+                isLeft = value!;
               });
             },
           ),
           CheckboxListTile(
-            title: Text('Threatened'),
+            title: Text('Right'),
             controlAffinity: ListTileControlAffinity.leading,
-            value: isThreatened,
+            value: isRight,
             onChanged: (value) {
               setState(() {
-                isThreatened = value!;
+                isRight = value!;
               });
             },
           ),
           CheckboxListTile(
-            title: Text('Obstructed'),
+            title: Text('Rib Binder'),
             controlAffinity: ListTileControlAffinity.leading,
-            value: isObstructed,
+            value: isRibBinder,
             onChanged: (value) {
               setState(() {
-                isObstructed = value!;
+                isRibBinder = value!;
               });
             },
           ),
           SizedBox(height: 20),
           Text(
-            'Airway Manuever',
+            'Oxygen',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          CheckboxListTile(
-            title: Text('Head Tilt/Chin Lift'),
-            controlAffinity: ListTileControlAffinity.leading,
-            value: isHeadTilt,
-            onChanged: (value) {
-              setState(() {
-                isHeadTilt = value!;
-              });
-            },
+          TextField(
+            controller: oxygenController,
+            decoration: InputDecoration(
+              hintText: 'Enter Oxygen value',
+            ),
           ),
-          CheckboxListTile(
-            title: Text('Jaw Thrust'),
-            controlAffinity: ListTileControlAffinity.leading,
-            value: isJawThrust,
-            onChanged: (value) {
-              setState(() {
-                isJawThrust = value!;
-              });
-            },
+          SizedBox(height: 20),
+          Text(
+            'Chest/Needle Tube',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          CheckboxListTile(
-            title: Text('Cervical'),
-            controlAffinity: ListTileControlAffinity.leading,
-            value: isCervical,
-            onChanged: (value) {
-              setState(() {
-                isCervical = value!;
-              });
-            },
-          ),
-          CheckboxListTile(
-            title: Text('Suctioning'),
-            controlAffinity: ListTileControlAffinity.leading,
-            value: isSuctioning,
-            onChanged: (value) {
-              setState(() {
-                isSuctioning = value!;
-              });
-            },
+          TextField(
+            controller: chestNeedleTubeController,
+            decoration: InputDecoration(
+              hintText: 'Enter Chest/Needle Tube value',
+            ),
           ),
         ],
       ),
