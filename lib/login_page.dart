@@ -1,9 +1,11 @@
 //import 'dart:html';
+// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -74,6 +76,8 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class NewPage extends StatefulWidget {
+  const NewPage({super.key});
+
   @override
   _NewPageState createState() => _NewPageState();
 }
@@ -186,6 +190,8 @@ class _NewPageState extends State<NewPage> {
 }
 
 class secondPage extends StatefulWidget {
+  const secondPage({super.key});
+
   @override
   _secondPageState createState() => _secondPageState();
 }
@@ -280,6 +286,8 @@ class _secondPageState extends State<secondPage> {
 }
 
 class MechanismOfInjury extends StatefulWidget {
+  const MechanismOfInjury({super.key});
+
   @override
   _MechanismOfInjuryState createState() => _MechanismOfInjuryState();
 }
@@ -603,6 +611,8 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
 }
 
 class AirwayPage extends StatefulWidget {
+  const AirwayPage({super.key});
+
   @override
   _AirwayPageState createState() => _AirwayPageState();
 }
@@ -747,6 +757,8 @@ class _AirwayPageState extends State<AirwayPage> {
 }
 
 class BreathingPage extends StatefulWidget {
+  const BreathingPage({super.key});
+
   @override
   _BreathingPageState createState() => _BreathingPageState();
 }
@@ -767,7 +779,9 @@ class _BreathingPageState extends State<BreathingPage> {
       appBar: AppBar(
         title: Text('Breathing'),
       ),
-      body: Column(
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20.0),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
@@ -855,7 +869,30 @@ class _BreathingPageState extends State<BreathingPage> {
               hintText: 'Enter Chest/Needle Tube value',
             ),
           ),
+          SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BreathingPage()));
+                  },
+                  child: Text('Next'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(
+                        context); // Navigate back to the previous page
+                  },
+                  child: Text('Prev'),
+                ),
+              ],
+            ),
         ],
+      ),
       ),
     );
   }
