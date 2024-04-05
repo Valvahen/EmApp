@@ -1,6 +1,4 @@
 //import 'dart:html';
-// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -912,86 +910,700 @@ class _CirculationPageState extends State<CirculationPage> {
   bool isCool = false;
   bool lessThan2 = false;
   bool greaterThan2 = false;
+  bool isWeak = false;
+  bool isThready = false;
+  bool isBounding = false;
+  bool isJvd = false;
+  bool isControlled = false;
+  bool isIv = false;
+  bool isIo = false;
+  bool isNs = false;
+  bool isRl = false;
+  bool isPelvicBinderPlaced = false;
+  bool isTourniquetApplied = false;
+
+  TextEditingController ivf = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Circulation'),
+      appBar: AppBar(
+        title: Text('Circulation'),
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Skin',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            CheckboxListTile(
+                title: Text('Warm'),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: isWarm,
+                onChanged: (value) {
+                  setState(() {
+                    isWarm = value!;
+                  });
+                }),
+            CheckboxListTile(
+              title: Text('Pale'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isPale,
+              onChanged: (value) {
+                setState(() {
+                  isPale = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Cyanotic'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isCyanotic,
+              onChanged: (value) {
+                setState(() {
+                  isCyanotic = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Cool'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isCool,
+              onChanged: (value) {
+                setState(() {
+                  isCool = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Text(
+              'CRT',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            CheckboxListTile(
+              title: Text('<2:'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: lessThan2,
+              onChanged: (value) {
+                setState(() {
+                  lessThan2 = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('>2:'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: greaterThan2,
+              onChanged: (value) {
+                setState(() {
+                  greaterThan2 = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Pulses',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            CheckboxListTile(
+              title: Text('Weak'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isWeak,
+              onChanged: (value) {
+                setState(() {
+                  isWeak = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Thready'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isThready,
+              onChanged: (value) {
+                setState(() {
+                  isThready = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Bounding'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isBounding,
+              onChanged: (value) {
+                setState(() {
+                  isBounding = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('JVD:'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isJvd,
+              onChanged: (value) {
+                setState(() {
+                  isJvd = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Bleeding controlled'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isControlled,
+              onChanged: (value) {
+                setState(() {
+                  isControlled = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Acess:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            CheckboxListTile(
+              title: Text('IV'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isIv,
+              onChanged: (value) {
+                setState(() {
+                  isIv = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('IO'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isIo,
+              onChanged: (value) {
+                setState(() {
+                  isIo = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Text(
+              'IVF:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: ivf,
+              decoration: InputDecoration(
+                hintText: 'Enter text',
+              ),
+            ),
+            CheckboxListTile(
+              title: Text('NS'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isNs,
+              onChanged: (value) {
+                setState(() {
+                  isNs = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('RL'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isRl,
+              onChanged: (value) {
+                setState(() {
+                  isRl = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Pelvic Binder placed'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isPelvicBinderPlaced,
+              onChanged: (value) {
+                setState(() {
+                  isPelvicBinderPlaced = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Torniquet applied'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isTourniquetApplied,
+              onChanged: (value) {
+                setState(() {
+                  isTourniquetApplied = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DisabilityPage()));
+                  },
+                  child: Text('Next'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(
+                        context); // Navigate back to the previous page
+                  },
+                  child: Text('Prev'),
+                ),
+              ],
+            ),
+          ],
         ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Skin',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                CheckboxListTile(
-                    title: Text('Warm'),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    value: isWarm,
-                    onChanged: (value) {
-                      setState(() {
-                        isWarm = value!;
-                      });
-                    }),
-                CheckboxListTile(
-                  title: Text('Pale'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: isPale,
-                  onChanged: (value) {
-                    setState(() {
-                      isPale = value!;
-                    });
+      ),
+    );
+  }
+}
+
+class DisabilityPage extends StatefulWidget {
+  const DisabilityPage({super.key});
+
+  @override
+  _DisabilityPageState createState() => _DisabilityPageState();
+}
+
+class _DisabilityPageState extends State<DisabilityPage> {
+  bool isAlert = false;
+  bool isV = false;
+  bool isP = false;
+  bool isUnconscious = false;
+  bool isExposedCompletly = false;
+
+  TextEditingController pupils = TextEditingController();
+  TextEditingController signsAndSymptoms = TextEditingController();
+  TextEditingController Allergies = TextEditingController();
+  TextEditingController Medications = TextEditingController();
+  TextEditingController postMedicalHistory = TextEditingController();
+  TextEditingController lastMeal = TextEditingController();
+  TextEditingController eventLeadingForCause = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Disability'),
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Responsiveness:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            CheckboxListTile(
+              title: Text('ALert'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isAlert,
+              onChanged: (value) {
+                setState(() {
+                  isAlert = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('V'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isV,
+              onChanged: (value) {
+                setState(() {
+                  isV = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('P'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isP,
+              onChanged: (value) {
+                setState(() {
+                  isP = value!;
+                });
+              },
+            ),
+            CheckboxListTile(
+              title: Text('Unconscious'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isUnconscious,
+              onChanged: (value) {
+                setState(() {
+                  isUnconscious = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Pupils:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: pupils,
+              decoration: InputDecoration(
+                hintText: 'Enter condition of pupils',
+              ),
+            ),
+            CheckboxListTile(
+              title: Text('Exposed Completly'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isExposedCompletly,
+              onChanged: (value) {
+                setState(() {
+                  isExposedCompletly = value!;
+                });
+              },
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Signs and Symptoms:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: signsAndSymptoms,
+              decoration: InputDecoration(
+                hintText: 'Enter the signs and symptoms',
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Allergies:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: Allergies,
+              decoration: InputDecoration(
+                hintText: 'Enter the allergies',
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Medication:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: Medications,
+              decoration: InputDecoration(
+                hintText: 'Enter medications',
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Post Medical history:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: postMedicalHistory,
+              decoration: InputDecoration(
+                hintText: 'Enter the signs and symptoms',
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Last Meal:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: lastMeal,
+              decoration: InputDecoration(
+                hintText: 'Enter the last meal details',
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Event leading for the cause:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: eventLeadingForCause,
+              decoration: InputDecoration(
+                hintText: 'Enter the signs and symptoms',
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => VitalsPage()));
                   },
+                  child: Text('Next'),
                 ),
-                CheckboxListTile(
-                  title: Text('Cyanotic'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: isCyanotic,
-                  onChanged: (value) {
-                    setState(() {
-                      isCyanotic = value!;
-                    });
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(
+                        context); // Navigate back to the previous page
                   },
+                  child: Text('Prev'),
                 ),
-                CheckboxListTile(
-                  title: Text('Cool'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: isCool,
-                  onChanged: (value) {
-                    setState(() {
-                      isCool = value!;
-                    });
-                  },
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class VitalsPage extends StatefulWidget {
+  @override
+  _VitalsPageState createState() => _VitalsPageState();
+}
+
+class _VitalsPageState extends State<VitalsPage> {
+  final _formKey = GlobalKey<FormState>();
+  final List<Map<String, dynamic>> _vitalsData = [];
+
+  final TextEditingController _timeController = TextEditingController();
+  final TextEditingController _hrController = TextEditingController();
+  final TextEditingController _rrController = TextEditingController();
+  final TextEditingController _spo2Controller = TextEditingController();
+  final TextEditingController _bpController = TextEditingController();
+  final TextEditingController _grbsController = TextEditingController();
+  final TextEditingController _gcsController = TextEditingController();
+  final TextEditingController _tempController = TextEditingController();
+  final TextEditingController _injurySustained = TextEditingController();
+  final TextEditingController _interventionPerformed = TextEditingController();
+  final TextEditingController _requirements = TextEditingController();
+  final TextEditingController _estimatedTimeOfArrival = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Vitals'),
+      ),
+      body: SingleChildScrollView(
+        // Wrap with SingleChildScrollView
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _timeController,
+                      decoration: InputDecoration(labelText: 'Time'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a time';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _hrController,
+                      decoration: InputDecoration(labelText: 'HR'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a heart rate';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _rrController,
+                      decoration: InputDecoration(labelText: 'RR'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a respiratory rate';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _spo2Controller,
+                      decoration: InputDecoration(labelText: 'SpO2'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a SpO2 value';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _bpController,
+                      decoration: InputDecoration(labelText: 'BP'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a blood pressure';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _grbsController,
+                      decoration: InputDecoration(labelText: 'GRBS'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a glucose value';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _gcsController,
+                      decoration: InputDecoration(labelText: 'GCS'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a GCS value';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _tempController,
+                      decoration: InputDecoration(labelText: 'Temp'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a temperature';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _injurySustained,
+                      decoration:
+                          InputDecoration(labelText: 'Injuries Sustained'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the injuries sustained';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _interventionPerformed,
+                      decoration:
+                          InputDecoration(labelText: 'Intervention Performed'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the intervention performed';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _requirements,
+                      decoration: InputDecoration(labelText: 'Requirements'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a requirement';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _estimatedTimeOfArrival,
+                      decoration: InputDecoration(
+                          labelText: 'Estimated Time Of Arrival'),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the estimated time of arrival';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _saveFormData();
+                            }
+                          },
+                          child: Text('Submit'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(
+                                context); // Navigate back to the previous page
+                          },
+                          child: Text('Prev'),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                SizedBox(height: 20),
-                Text(
-                  'CRT',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                CheckboxListTile(
-                  title: Text('<2:'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: lessThan2,
-                  onChanged: (value) {
-                    setState(() {
-                      lessThan2 = value!;
-                    });
-                  },
-                ),
-                CheckboxListTile(
-                  title: Text('>2:'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  value: greaterThan2,
-                  onChanged: (value) {
-                    setState(() {
-                      greaterThan2 = value!;
-                    });
-                  },
-                ),
-              ]),
-        ));
+              ),
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: _vitalsData.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('Time: ${_vitalsData[index]['time']}'),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('HR: ${_vitalsData[index]['hr']}'),
+                      Text('RR: ${_vitalsData[index]['rr']}'),
+                      Text('SpO2: ${_vitalsData[index]['spo2']}'),
+                      Text('BP: ${_vitalsData[index]['bp']}'),
+                      Text('GRBS: ${_vitalsData[index]['grbs']}'),
+                      Text('GCS: ${_vitalsData[index]['gcs']}'),
+                      Text('Temp: ${_vitalsData[index]['temp']}'),
+                      Text(
+                          'Injuries Sustained: ${_vitalsData[index]['injurySustained']}'),
+                      Text(
+                          'Intervention Performed: ${_vitalsData[index]['interventionPerformed']}'),
+                      Text(
+                          'Requirements: ${_vitalsData[index]['requirements']}'),
+                      Text(
+                          'Estimated Time Of Arrival: ${_vitalsData[index]['EstimatedTimeOfArrival']}'),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _saveFormData() {
+    setState(() {
+      _vitalsData.add({
+        'time': _timeController.text,
+        'hr': _hrController.text,
+        'rr': _rrController.text,
+        'spo2': _spo2Controller.text,
+        'bp': _bpController.text,
+        'grbs': _grbsController.text,
+        'gcs': _gcsController.text,
+        'temp': _tempController.text,
+        'injurySustained': _injurySustained.text,
+        'interventionPerformed': _interventionPerformed.text,
+        'requirements': _requirements.text,
+        'EstimatedTimeOfArrival': _estimatedTimeOfArrival.text,
+      });
+      // Clearing text controllers after saving data
+      _timeController.clear();
+      _hrController.clear();
+      _rrController.clear();
+      _spo2Controller.clear();
+      _bpController.clear();
+      _grbsController.clear();
+      _gcsController.clear();
+      _tempController.clear();
+      _injurySustained.clear();
+      _interventionPerformed.clear();
+      _requirements.clear();
+      _estimatedTimeOfArrival.clear();
+    });
   }
 }
