@@ -781,95 +781,95 @@ class _BreathingPageState extends State<BreathingPage> {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'Spontaneous Respiration',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          ListTile(
-            leading: Radio(
-              value: "yes",
-              groupValue: selection,
-              onChanged: (String? value) {
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Spontaneous Respiration',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            ListTile(
+              leading: Radio(
+                value: "yes",
+                groupValue: selection,
+                onChanged: (String? value) {
+                  setState(() {
+                    selection = value!;
+                  });
+                },
+              ),
+              title: Text('Yes'),
+            ),
+            ListTile(
+              leading: Radio(
+                value: 'No',
+                groupValue: selection,
+                onChanged: (String? value) {
+                  setState(() {
+                    selection = value!;
+                  });
+                },
+              ),
+              title: Text('No'),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Breath Sounds',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            CheckboxListTile(
+              title: Text('Left'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isLeft,
+              onChanged: (value) {
                 setState(() {
-                  selection = value!;
+                  isLeft = value!;
                 });
               },
             ),
-            title: Text('Yes'),
-          ),
-          ListTile(
-            leading: Radio(
-              value: 'No',
-              groupValue: selection,
-              onChanged: (String? value) {
+            CheckboxListTile(
+              title: Text('Right'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isRight,
+              onChanged: (value) {
                 setState(() {
-                  selection = value!;
+                  isRight = value!;
                 });
               },
             ),
-            title: Text('No'),
-          ),
-          SizedBox(height: 20),
-          Text(
-            'Breath Sounds',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          CheckboxListTile(
-            title: Text('Left'),
-            controlAffinity: ListTileControlAffinity.leading,
-            value: isLeft,
-            onChanged: (value) {
-              setState(() {
-                isLeft = value!;
-              });
-            },
-          ),
-          CheckboxListTile(
-            title: Text('Right'),
-            controlAffinity: ListTileControlAffinity.leading,
-            value: isRight,
-            onChanged: (value) {
-              setState(() {
-                isRight = value!;
-              });
-            },
-          ),
-          CheckboxListTile(
-            title: Text('Rib Binder'),
-            controlAffinity: ListTileControlAffinity.leading,
-            value: isRibBinder,
-            onChanged: (value) {
-              setState(() {
-                isRibBinder = value!;
-              });
-            },
-          ),
-          SizedBox(height: 20),
-          Text(
-            'Oxygen',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          TextField(
-            controller: oxygenController,
-            decoration: InputDecoration(
-              hintText: 'Enter Oxygen value',
+            CheckboxListTile(
+              title: Text('Rib Binder'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isRibBinder,
+              onChanged: (value) {
+                setState(() {
+                  isRibBinder = value!;
+                });
+              },
             ),
-          ),
-          SizedBox(height: 20),
-          Text(
-            'Chest/Needle Tube',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          TextField(
-            controller: chestNeedleTubeController,
-            decoration: InputDecoration(
-              hintText: 'Enter Chest/Needle Tube value',
+            SizedBox(height: 20),
+            Text(
+              'Oxygen',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-          ),
-          SizedBox(height: 20),
+            TextField(
+              controller: oxygenController,
+              decoration: InputDecoration(
+                hintText: 'Enter Oxygen value',
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Chest/Needle Tube',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: chestNeedleTubeController,
+              decoration: InputDecoration(
+                hintText: 'Enter Chest/Needle Tube value',
+              ),
+            ),
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -878,7 +878,7 @@ class _BreathingPageState extends State<BreathingPage> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => BreathingPage()));
+                            builder: (context) => CirculationPage()));
                   },
                   child: Text('Next'),
                 ),
@@ -891,9 +891,107 @@ class _BreathingPageState extends State<BreathingPage> {
                 ),
               ],
             ),
-        ],
-      ),
+          ],
+        ),
       ),
     );
+  }
+}
+
+class CirculationPage extends StatefulWidget {
+  const CirculationPage({super.key});
+
+  @override
+  _CirculationPageState createState() => _CirculationPageState();
+}
+
+class _CirculationPageState extends State<CirculationPage> {
+  bool isWarm = false;
+  bool isPale = false;
+  bool isCyanotic = false;
+  bool isCool = false;
+  bool lessThan2 = false;
+  bool greaterThan2 = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Circulation'),
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Skin',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                CheckboxListTile(
+                    title: Text('Warm'),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: isWarm,
+                    onChanged: (value) {
+                      setState(() {
+                        isWarm = value!;
+                      });
+                    }),
+                CheckboxListTile(
+                  title: Text('Pale'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: isPale,
+                  onChanged: (value) {
+                    setState(() {
+                      isPale = value!;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text('Cyanotic'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: isCyanotic,
+                  onChanged: (value) {
+                    setState(() {
+                      isCyanotic = value!;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text('Cool'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: isCool,
+                  onChanged: (value) {
+                    setState(() {
+                      isCool = value!;
+                    });
+                  },
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'CRT',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                CheckboxListTile(
+                  title: Text('<2:'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: lessThan2,
+                  onChanged: (value) {
+                    setState(() {
+                      lessThan2 = value!;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text('>2:'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: greaterThan2,
+                  onChanged: (value) {
+                    setState(() {
+                      greaterThan2 = value!;
+                    });
+                  },
+                ),
+              ]),
+        ));
   }
 }
