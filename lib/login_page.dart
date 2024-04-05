@@ -1,5 +1,8 @@
+import 'dart:html';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -579,10 +582,8 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AirwayPage()));
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => AirwayPage()));
                   },
                   child: Text('Next'),
                 ),
@@ -603,7 +604,6 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
 }
 
 class AirwayPage extends StatefulWidget {
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:1959196253.
   @override
   _AirwayPageState createState() => _AirwayPageState();
 }
@@ -612,112 +612,95 @@ class _AirwayPageState extends State<AirwayPage> {
   bool isPatent = false;
   bool isThreatened = false;
   bool isObstructed = false;
-
-  bool isHeadTiltChinLift = false;
+  bool isHeadTilt = false;
   bool isJawThrust = false;
-  bool isCervicalCollar = false;
+  bool isCervical = false;
   bool isSuctioning = false;
-
-  String? obstructedBy;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Airway'),
+        title: Text('Airway Checkboxes'),
       ),
       body: Column(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Airway:'),
-              Row(
-                children: [
-                  Checkbox(
-                    value: isPatent,
-                    onChanged: (value) {
-                      setState(() {
-                        isPatent = value!;
-                      });
-                    },
-                  ),
-                  Text('Patent'),
-                  Checkbox(
-                    value: isThreatened,
-                    onChanged: (value) {
-                      setState(() {
-                        isThreatened = value!;
-                      });
-                    },
-                  ),
-                  Text('Threatened'),
-                  Checkbox(
-                    value: isObstructed,
-                    onChanged: (value) {
-                      setState(() {
-                        isObstructed = value!;
-                      });
-                    },
-                  ),
-                  Text('Obstructed'),
-                ],
-              ),
-            ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'Airway',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Airway maneuver:'),
-              Row(
-                children: [
-                  Checkbox(
-                    value: isHeadTiltChinLift,
-                    onChanged: (value) {
-                      setState(() {
-                        isHeadTiltChinLift = value!;
-                      });
-                    },
-                  ),
-                  Text('Head tilt/chin lift'),
-                  Checkbox(
-                    value: isJawThrust,
-                    onChanged: (value) {
-                      setState(() {
-                        isJawThrust = value!;
-                      });
-                    },
-                  ),
-                  Text('Jaw thrust'),
-                  Checkbox(
-                    value: isCervicalCollar,
-                    onChanged: (value) {
-                      setState(() {
-                        isCervicalCollar = value!;
-                      });
-                    },
-                  ),
-                  Text('Cervical collar'),
-                  Checkbox(
-                    value: isSuctioning,
-                    onChanged: (value) {
-                      setState(() {
-                        isSuctioning = value!;
-                      });
-                    },
-                  ),
-                  Text('Suctioning'),
-                ],
-              ),
-            ],
-          ),
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Obstructed by',
-            ),
+          CheckboxListTile(
+            title: Text('Patent'),
+            controlAffinity: ListTileControlAffinity.leading,
+            value: isPatent,
             onChanged: (value) {
               setState(() {
-                obstructedBy = value;
+                isPatent = value!;
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Threatened'),
+            controlAffinity: ListTileControlAffinity.leading,
+            value: isThreatened,
+            onChanged: (value) {
+              setState(() {
+                isThreatened = value!;
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Obstructed'),
+            controlAffinity: ListTileControlAffinity.leading,
+            value: isObstructed,
+            onChanged: (value) {
+              setState(() {
+                isObstructed = value!;
+              });
+            },
+          ),
+          SizedBox(height: 20),
+          Text(
+            'Airway Manuever',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          CheckboxListTile(
+            title: Text('Head Tilt/Chin Lift'),
+            controlAffinity: ListTileControlAffinity.leading,
+            value: isHeadTilt,
+            onChanged: (value) {
+              setState(() {
+                isHeadTilt = value!;
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Jaw Thrust'),
+            controlAffinity: ListTileControlAffinity.leading,
+            value: isJawThrust,
+            onChanged: (value) {
+              setState(() {
+                isJawThrust = value!;
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Cervical'),
+            controlAffinity: ListTileControlAffinity.leading,
+            value: isCervical,
+            onChanged: (value) {
+              setState(() {
+                isCervical = value!;
+              });
+            },
+          ),
+          CheckboxListTile(
+            title: Text('Suctioning'),
+            controlAffinity: ListTileControlAffinity.leading,
+            value: isSuctioning,
+            onChanged: (value) {
+              setState(() {
+                isSuctioning = value!;
               });
             },
           ),
