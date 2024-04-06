@@ -304,17 +304,17 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AirwayPage()));
-                  },
-                  child: Text('Next'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
                     Navigator.pop(
                         context); // Navigate back to the previous page
                   },
                   child: Text('Prev'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AirwayPage()));
+                  },
+                  child: Text('Next'),
                 ),
               ],
             ),
