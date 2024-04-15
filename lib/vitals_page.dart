@@ -208,8 +208,8 @@ class _VitalsPageState extends State<VitalsPage> {
                         ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              _saveFormData();
                               _submitDataToSupabase();
+                              _saveFormData();
                             }
                           },
                           child: Text('Submit'),
