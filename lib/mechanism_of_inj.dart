@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/airway_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 class MechanismOfInjury extends StatefulWidget {
   const MechanismOfInjury({super.key});
 
@@ -8,7 +9,7 @@ class MechanismOfInjury extends StatefulWidget {
 }
 
 class _MechanismOfInjuryState extends State<MechanismOfInjury> {
-  // Variables to store checkbox values
+  // Checkbox values
   bool rta = false;
   bool driver = false;
   bool passenger = false;
@@ -33,10 +34,44 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
   bool extricated = false;
   bool ejected = false;
 
-  // Controllers for text fields
+  // Text field controllers
   TextEditingController timeController = TextEditingController();
   TextEditingController vehicleInvolvedController = TextEditingController();
   TextEditingController crashedWithController = TextEditingController();
+
+  void _submitDataToSupabase() async {
+    // Insert data into the 'mechanism' table
+    await Supabase.instance.client.from('mechanism').insert([
+      {
+        'i_id': 1,  // Replace with appropriate value
+        'day': 2,   // Replace with appropriate value
+        'rta': rta ? 'yes' : 'no',
+        'driver': driver ? 'yes' : 'no',
+        'passenger': passenger ? 'yes' : 'no',
+        'pedestrian': pedestrian ? 'yes' : 'no',
+        'airbag': airbag ? 'yes' : 'no',
+        'seatbelt': seatBelt ? 'yes' : 'no',
+        'othervehi': otherVehicle ? 'yes' : 'no',
+        'helmet': helmet ? 'yes' : 'no',
+        'fall': fallFromHeight ? 'yes' : 'no',
+        'gun': gunShot ? 'yes' : 'no',
+        'animal': animalAttack ? 'yes' : 'no',
+        'stab': stabCut ? 'yes' : 'no',
+        'blunt': bluntTrauma ? 'yes' : 'no',
+        'assault': assault ? 'yes' : 'no',
+        'crushed': crushInjury ? 'yes' : 'no',
+        'penetration': penetrating ? 'yes' : 'no',
+        'degloved': degloving ? 'yes' : 'no',
+        'explosion': explosion ? 'yes' : 'no',
+        'burns': burnsThermal ? 'yes' : 'no',
+        'drowning': drowning ? 'yes' : 'no',
+        'extricated': extricated ? 'yes' : 'no',
+        'ejected': ejected ? 'yes' : 'no',
+        'vehicle_involved': vehicleInvolvedController.text,
+        'crashed_with': crashedWithController.text,
+      }
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
