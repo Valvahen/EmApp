@@ -21,7 +21,11 @@ class _LoginPageState extends State<LoginPage> {
         'e_id': '12121',
         'username': _username,
         'password': _password,
-        'designation': 'Jamshedpur',
+      }
+    ]);
+    await Supabase.instance.client.from('responder').insert([
+      {
+        'e_id':'12122',
       }
     ]);
   }
