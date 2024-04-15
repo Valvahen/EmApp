@@ -21,15 +21,14 @@ class _BreathingPageState extends State<BreathingPage> {
 
   void _submitDataToSupabase() async {
     // Insert data into the 'mechanism' table
-    await Supabase.instance.client.from('airway').insert([
+    await Supabase.instance.client.from('breathing').insert([
       {
-        'i_id': 1, // Replace with appropriate value
-        //'spontaneous': selection == 'yes' ? 'yes' : 'no',
+        'spontaneous': selection == 'yes' ? 'yes' : 'no',
         'breath_l': isLeft ? 'yes' : 'no',
         'breath_r': isRight ? 'yes' : 'no',
-        'breath_rib': isRibBinder ? 'yes' : 'no',
+        'rib_binder': isRibBinder ? 'yes' : 'no',
         'oxygen': oxygenController.text,
-        'object': chestNeedleTubeController.text,
+        'tube': chestNeedleTubeController.text,
       }
     ]);
   }
@@ -147,6 +146,7 @@ class _BreathingPageState extends State<BreathingPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => CirculationPage()));
+                    _submitDataToSupabase();
                   },
                   child: Text('Next'),
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/vitals_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 class DisabilityPage extends StatefulWidget {
   const DisabilityPage({super.key});
 
@@ -27,24 +28,22 @@ class _DisabilityPageState extends State<DisabilityPage> {
     // Insert data into the 'mechanism' table
     await Supabase.instance.client.from('disability').insert([
       {
-        'i_id': 1,  // Replace with appropriate value
         'a': isAlert ? 'yes' : 'no',
         'v': isV ? 'yes' : 'no',
         'p': isP ? 'yes' : 'no',
-        'unconscious': isUnconscious ? 'yes' : 'no',
+        'u': isUnconscious ? 'yes' : 'no',
+        'pupils': pupils.text,
         'exposed': isExposedCompletly ? 'yes' : 'no',
-        'pupils':pupils.text,
       }
     ]);
     await Supabase.instance.client.from('sample').insert([
       {
-        'i_id': 1,  // Replace with appropriate value
-        'signs_and_symptoms':signsAndSymptoms.text,
-        'allergies':allergies.text,
-        'medications':medications.text,
-        'post_medical_history':postMedicalHistory.text,
-        'last_meal':lastMeal.text,
-        'event_leading_for_cause':eventLeadingForCause.text,
+        's': signsAndSymptoms.text,
+        'a': allergies.text,
+        'm': medications.text,
+        'p': postMedicalHistory.text,
+        'l': lastMeal.text,
+        'e': eventLeadingForCause.text,
       }
     ]);
   }
@@ -206,6 +205,7 @@ class _DisabilityPageState extends State<DisabilityPage> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => VitalsPage()));
+                    _submitDataToSupabase();
                   },
                   child: Text('Next'),
                 ),

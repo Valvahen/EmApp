@@ -16,8 +16,6 @@ class _massCasualtyPageState extends State<massCasualtyPage> {
     // Insert the data into the 'i_info' table
     await Supabase.instance.client.from('i_quantity').insert([
       {
-        'i_id': 1,  //replace with something pls
-        'day': 1, //this also see
         'single': _selection == 'Single' ? 'yes' : 'no',
         'multiple': _selection == 'Multiple' ? 'yes' : 'no',
         'na': _selection == 'NA' ? 'yes' : 'no',
@@ -114,6 +112,7 @@ class _massCasualtyPageState extends State<massCasualtyPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => MechanismOfInjury()));
+                    _submitDataToSupabase();
                   },
                   child: Text('Next'),
                 ),

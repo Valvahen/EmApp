@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:myapp/airway_page.dart';
-import 'package:myapp/breathing_page.dart';
-import 'package:myapp/circulation_page.dart';
-import 'package:myapp/detail_page.dart';
-import 'package:myapp/disablity_page.dart';
-import 'package:myapp/login_page.dart';
-import 'package:myapp/mass_cas.dart';
-import 'package:myapp/mechanism_of_inj.dart';
 
 class VitalsPage extends StatefulWidget {
   @override
@@ -48,7 +40,7 @@ class _VitalsPageState extends State<VitalsPage> {
     ]);
     await Supabase.instance.client.from('injuries').insert([
       { // Replace with appropriate value
-        'injuries': _injurySustained.text,
+        'injury': _injurySustained.text,
       }
     ]);
     await Supabase.instance.client.from('requirements').insert([
@@ -58,7 +50,7 @@ class _VitalsPageState extends State<VitalsPage> {
     ]);
     await Supabase.instance.client.from('timeofarr').insert([
       {
-        'EstimatedTimeOfArrival': _estimatedTimeOfArrival.text,
+        'timeofarrival': _estimatedTimeOfArrival.text,
       }
     ]);
   }

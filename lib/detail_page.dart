@@ -22,8 +22,10 @@ class _DetailsPageState extends State<DetailsPage> {
 
     // Check if each checkbox is checked and set the corresponding value
     bool isHomeSelected = selectedCheckboxes.contains('Home');
-    bool isHealthFacilitySelected = selectedCheckboxes.contains('Health Care facility');
-    bool isPublicBuildingSelected = selectedCheckboxes.contains('Public building');
+    bool isHealthFacilitySelected =
+        selectedCheckboxes.contains('Health Care facility');
+    bool isPublicBuildingSelected =
+        selectedCheckboxes.contains('Public building');
     bool isStreetSelected = selectedCheckboxes.contains('Street/highway');
 
     // Log the length of the day value
@@ -32,13 +34,14 @@ class _DetailsPageState extends State<DetailsPage> {
     // Insert the data into the 'i_info' table
     await Supabase.instance.client.from('i_info').insert([
       {
-        'i_id': 1,  //replace with something pls
-        'day': time, 
+        'day': time,
         'home': isHomeSelected ? 'yes' : 'no',
         'health_facility': isHealthFacilitySelected ? 'yes' : 'no',
         'public_place': isPublicBuildingSelected ? 'yes' : 'no',
         'street': isStreetSelected ? 'yes' : 'no',
-        'others': otherText.isNotEmpty ? otherText : 'N/A', // Use 'N/A' if otherText is empty
+        'others': otherText.isNotEmpty
+            ? otherText
+            : 'N/A', // Use 'N/A' if otherText is empty
       }
     ]);
   }
@@ -130,6 +133,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => massCasualtyPage()));
+                _submitDataToSupabase();
               },
               child: Text('Next'))
         ],

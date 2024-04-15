@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/disablity_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 class CirculationPage extends StatefulWidget {
   const CirculationPage({super.key});
 
@@ -33,7 +34,6 @@ class _CirculationPageState extends State<CirculationPage> {
     // Insert data into the 'mechanism' table
     await Supabase.instance.client.from('circulation').insert([
       {
-        'i_id': 1,  // Replace with appropriate value
         'warmskin': isWarm ? 'yes' : 'no',
         'paleskin': isPale ? 'yes' : 'no',
         'cyanotic': isCyanotic ? 'yes' : 'no',
@@ -282,6 +282,7 @@ class _CirculationPageState extends State<CirculationPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => DisabilityPage()));
+                    _submitDataToSupabase();
                   },
                   child: Text('Next'),
                 ),

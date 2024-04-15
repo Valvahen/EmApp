@@ -44,8 +44,6 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
     // Insert data into the 'mechanism' table
     await Supabase.instance.client.from('mechanism').insert([
       {
-        'i_id': 1, // Replace with appropriate value
-        'day': 2, // Replace with appropriate value
         'rta': rta ? 'yes' : 'no',
         'driver': driver ? 'yes' : 'no',
         'passenger': passenger ? 'yes' : 'no',
@@ -68,8 +66,8 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
         'drowning': drowning ? 'yes' : 'no',
         'extricated': extricated ? 'yes' : 'no',
         'ejected': ejected ? 'yes' : 'no',
-        'vehicle_involved': vehicleInvolvedController.text,
-        'crashed_with': crashedWithController.text,
+        'vehi_invol': vehicleInvolvedController.text,
+        'crash_with': crashedWithController.text,
       }
     ]);
   }
@@ -349,6 +347,7 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => AirwayPage()));
+                    _submitDataToSupabase();
                   },
                   child: Text('Next'),
                 ),

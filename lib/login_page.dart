@@ -1,6 +1,6 @@
-//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:myapp/detail_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,6 +13,18 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String _username = '';
   String _password = '';
+
+  void _submitDataToSupabase() async {
+    // Insert data into the 'mechanism' table
+    await Supabase.instance.client.from('employee_data').insert([
+      {
+        'e_id': '12121',
+        'username': _username,
+        'password': _password,
+        'designation': 'Jamshedpur',
+      }
+    ]);
+  }
 
   void _login() {
     if (_formKey.currentState!.validate()) {
@@ -64,7 +76,10 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             ElevatedButton(
-              onPressed: _login,
+              onPressed: () {
+                _login();
+                _submitDataToSupabase();
+              },
               child: Text('Login'),
             ),
           ],
