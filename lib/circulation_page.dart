@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/disablity_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 class CirculationPage extends StatefulWidget {
   const CirculationPage({super.key});
 
@@ -27,6 +28,33 @@ class _CirculationPageState extends State<CirculationPage> {
   bool isTourniquetApplied = false;
 
   TextEditingController ivf = TextEditingController();
+
+  void _submitDataToSupabase() async {
+    // Insert data into the 'mechanism' table
+    await Supabase.instance.client.from('circulation').insert([
+      {
+        'i_id': 1,  // Replace with appropriate value
+        'warmskin': isWarm ? 'yes' : 'no',
+        'paleskin': isPale ? 'yes' : 'no',
+        'cyanotic': isCyanotic ? 'yes' : 'no',
+        'cool': isCool ? 'yes' : 'no',
+        'crt': lessThan2 ? 'yes' : 'no',
+        'weak': isWeak ? 'yes' : 'no',
+        'thready': isThready ? 'yes' : 'no',
+        'bounding': isBounding ? 'yes' : 'no',
+        'jvd': isJvd ? 'yes' : 'no',
+        'bleedcont': isControlled ? 'yes' : 'no',
+        'iv': isIv ? 'yes' : 'no',
+        'io': isIo ? 'yes' : 'no',
+        'ns': isNs ? 'yes' : 'no',
+        'rl': isRl ? 'yes' : 'no',
+        'pelvicbinder': isPelvicBinderPlaced ? 'yes' : 'no',
+        'tourniquet': isTourniquetApplied ? 'yes' : 'no',
+        'ivf': ivf.text
+      }
+    ]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
