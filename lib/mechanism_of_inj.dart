@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/airway_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 class MechanismOfInjury extends StatefulWidget {
   const MechanismOfInjury({super.key});
 
@@ -43,8 +44,8 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
     // Insert data into the 'mechanism' table
     await Supabase.instance.client.from('mechanism').insert([
       {
-        'i_id': 1,  // Replace with appropriate value
-        'day': 2,   // Replace with appropriate value
+        'i_id': 1, // Replace with appropriate value
+        'day': 2, // Replace with appropriate value
         'rta': rta ? 'yes' : 'no',
         'driver': driver ? 'yes' : 'no',
         'passenger': passenger ? 'yes' : 'no',

@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:myapp/airway_page.dart';
+import 'package:myapp/breathing_page.dart';
+import 'package:myapp/circulation_page.dart';
+import 'package:myapp/detail_page.dart';
+import 'package:myapp/disablity_page.dart';
+import 'package:myapp/login_page.dart';
+import 'package:myapp/mass_cas.dart';
+import 'package:myapp/mechanism_of_inj.dart';
 
 class VitalsPage extends StatefulWidget {
   @override
@@ -22,12 +30,12 @@ class _VitalsPageState extends State<VitalsPage> {
   final TextEditingController _interventionPerformed = TextEditingController();
   final TextEditingController _requirements = TextEditingController();
   final TextEditingController _estimatedTimeOfArrival = TextEditingController();
-
+  
   void _submitDataToSupabase() async {
     // Insert data into the 'mechanism' table
     await Supabase.instance.client.from('vitals').insert([
       {
-        'i_id': 1, // Replace with appropriate value
+        'i_id': 1, 
         'time': _timeController.text,
         'hr': _hrController.text,
         'rr': _rrController.text,
@@ -36,13 +44,12 @@ class _VitalsPageState extends State<VitalsPage> {
         'grbs': _grbsController.text,
         'gcs': _gcsController.text,
         'temp': _tempController.text,
-        
       }
     ]);
     await Supabase.instance.client.from('injuries').insert([
       {
         'i_id': 1, // Replace with appropriate value
-        'injuries':_injurySustained.text,  
+        'injuries': _injurySustained.text,
       }
     ]);
     await Supabase.instance.client.from('requirements').insert([
@@ -55,7 +62,6 @@ class _VitalsPageState extends State<VitalsPage> {
       {
         'i_id': 1, // Replace with appropriate value
         'EstimatedTimeOfArrival': _estimatedTimeOfArrival.text,
-        
       }
     ]);
   }
@@ -214,6 +220,7 @@ class _VitalsPageState extends State<VitalsPage> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _saveFormData();
+                              _submitDataToSupabase();
                             }
                           },
                           child: Text('Submit'),
@@ -223,36 +230,6 @@ class _VitalsPageState extends State<VitalsPage> {
                   ],
                 ),
               ),
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: _vitalsData.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('Time: ${_vitalsData[index]['time']}'),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('HR: ${_vitalsData[index]['hr']}'),
-                      Text('RR: ${_vitalsData[index]['rr']}'),
-                      Text('SpO2: ${_vitalsData[index]['spo2']}'),
-                      Text('BP: ${_vitalsData[index]['bp']}'),
-                      Text('GRBS: ${_vitalsData[index]['grbs']}'),
-                      Text('GCS: ${_vitalsData[index]['gcs']}'),
-                      Text('Temp: ${_vitalsData[index]['temp']}'),
-                      Text(
-                          'Injuries Sustained: ${_vitalsData[index]['injurySustained']}'),
-                      Text(
-                          'Intervention Performed: ${_vitalsData[index]['interventionPerformed']}'),
-                      Text(
-                          'Requirements: ${_vitalsData[index]['requirements']}'),
-                      Text(
-                          'Estimated Time Of Arrival: ${_vitalsData[index]['EstimatedTimeOfArrival']}'),
-                    ],
-                  ),
-                );
-              },
             ),
           ],
         ),
