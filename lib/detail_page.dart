@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/mass_cas.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
@@ -12,32 +13,51 @@ class _DetailsPageState extends State<DetailsPage> {
   TimeOfDay selectedTime = TimeOfDay.now();
   Set<String> selectedCheckboxes = {"Home"};
   TextEditingController otherTextFieldController = TextEditingController();
+  TextEditingController timeFieldController = TextEditingController();
+
+  void _submitDataToSupabase() async {
+    // Get the text entered in the text field
+    String otherText = otherTextFieldController.text.trim(); // Trim whitespace
+    String time = timeFieldController.text.trim(); // Trim whitespace
+
+    // Check if each checkbox is checked and set the corresponding value
+    bool isHomeSelected = selectedCheckboxes.contains('Home');
+    bool isHealthFacilitySelected = selectedCheckboxes.contains('Health Care facility');
+    bool isPublicBuildingSelected = selectedCheckboxes.contains('Public building');
+    bool isStreetSelected = selectedCheckboxes.contains('Street/highway');
+
+    // Log the length of the day value
+    print('Length of day value: ${time.length}');
+
+    // Insert the data into the 'i_info' table
+    await Supabase.instance.client.from('i_info').insert([
+      {
+        'i_id': 1,  //replace with something pls
+        'day': time, 
+        'home': isHomeSelected ? 'yes' : 'no',
+        'health_facility': isHealthFacilitySelected ? 'yes' : 'no',
+        'public_place': isPublicBuildingSelected ? 'yes' : 'no',
+        'street': isStreetSelected ? 'yes' : 'no',
+        'others': otherText.isNotEmpty ? otherText : 'N/A', // Use 'N/A' if otherText is empty
+      }
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('DetailsPage'),
+        title: Text('Details Page'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Time text field
           TextField(
+            controller: timeFieldController,
             decoration: InputDecoration(
-              labelText: 'Select Time',
+              labelText: 'Enter time',
             ),
-            onTap: () async {
-              final TimeOfDay? newTime = await showTimePicker(
-                context: context,
-                initialTime: selectedTime,
-              );
-              if (newTime != null) {
-                setState(() {
-                  selectedTime = newTime;
-                });
-              }
-            },
           ),
           // Checkboxes
           Column(
@@ -109,7 +129,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => massCasualityPage()));
+                        builder: (context) => massCasualtyPage()));
               },
               child: Text('Next'))
         ],
