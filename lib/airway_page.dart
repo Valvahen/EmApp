@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/brething_page.dart';
+import 'package:myapp/breathing_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 class AirwayPage extends StatefulWidget {
   const AirwayPage({super.key});
 
@@ -17,6 +18,28 @@ class _AirwayPageState extends State<AirwayPage> {
   bool isSuctioning = false;
 
   TextEditingController obstructedBy = TextEditingController();
+
+  void _submitDataToSupabase() async {
+    // Insert data into the 'mechanism' table
+    await Supabase.instance.client.from('airway').insert([
+      {
+        'i_id': 1,  // Replace with appropriate value
+        'patent': isPatent ? 'yes' : 'no',
+        'threatened': isThreatened ? 'yes' : 'no',
+        'obstructed': isObstructed ? 'yes' : 'no',
+        'object': obstructedBy.text,
+      }
+    ]);
+    await Supabase.instance.client.from('prevention').insert([
+      {
+        'i_id': 1,  // Replace with appropriate value
+        'head_tilt': isHeadTilt ? 'yes' : 'no',
+        'jaw': isJawThrust ? 'yes' : 'no',
+        'collar': isCervical ? 'yes' : 'no',
+        'suctioning': isSuctioning ? 'yes' : 'no',
+      }
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
