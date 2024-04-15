@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 class VitalsPage extends StatefulWidget {
   @override
   _VitalsPageState createState() => _VitalsPageState();
@@ -20,6 +22,43 @@ class _VitalsPageState extends State<VitalsPage> {
   final TextEditingController _interventionPerformed = TextEditingController();
   final TextEditingController _requirements = TextEditingController();
   final TextEditingController _estimatedTimeOfArrival = TextEditingController();
+
+  void _submitDataToSupabase() async {
+    // Insert data into the 'mechanism' table
+    await Supabase.instance.client.from('vitals').insert([
+      {
+        'i_id': 1, // Replace with appropriate value
+        'time': _timeController.text,
+        'hr': _hrController.text,
+        'rr': _rrController.text,
+        'spo2': _spo2Controller.text,
+        'bp': _bpController.text,
+        'grbs': _grbsController.text,
+        'gcs': _gcsController.text,
+        'temp': _tempController.text,
+        
+      }
+    ]);
+    await Supabase.instance.client.from('injuries').insert([
+      {
+        'i_id': 1, // Replace with appropriate value
+        'injuries':_injurySustained.text,  
+      }
+    ]);
+    await Supabase.instance.client.from('requirements').insert([
+      {
+        'i_id': 1, // Replace with appropriate value
+        'requirements': _requirements.text,
+      }
+    ]);
+    await Supabase.instance.client.from('timeofarr').insert([
+      {
+        'i_id': 1, // Replace with appropriate value
+        'EstimatedTimeOfArrival': _estimatedTimeOfArrival.text,
+        
+      }
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
