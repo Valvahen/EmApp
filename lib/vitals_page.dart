@@ -31,6 +31,7 @@ class _VitalsPageState extends State<VitalsPage> {
   final TextEditingController _requirements = TextEditingController();
   final TextEditingController _estimatedTimeOfArrival = TextEditingController();
   
+  
   void _submitDataToSupabase() async {
     // Insert data into the 'mechanism' table
     await Supabase.instance.client.from('vitals').insert([
