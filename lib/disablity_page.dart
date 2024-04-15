@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/vitals_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 class DisabilityPage extends StatefulWidget {
   const DisabilityPage({super.key});
 
@@ -16,11 +17,37 @@ class _DisabilityPageState extends State<DisabilityPage> {
 
   TextEditingController pupils = TextEditingController();
   TextEditingController signsAndSymptoms = TextEditingController();
-  TextEditingController Allergies = TextEditingController();
-  TextEditingController Medications = TextEditingController();
+  TextEditingController allergies = TextEditingController();
+  TextEditingController medications = TextEditingController();
   TextEditingController postMedicalHistory = TextEditingController();
   TextEditingController lastMeal = TextEditingController();
   TextEditingController eventLeadingForCause = TextEditingController();
+
+  void _submitDataToSupabase() async {
+    // Insert data into the 'mechanism' table
+    await Supabase.instance.client.from('disability').insert([
+      {
+        'i_id': 1,  // Replace with appropriate value
+        'a': isAlert ? 'yes' : 'no',
+        'v': isV ? 'yes' : 'no',
+        'p': isP ? 'yes' : 'no',
+        'unconscious': isUnconscious ? 'yes' : 'no',
+        'exposed': isExposedCompletly ? 'yes' : 'no',
+        'pupils':pupils.text,
+      }
+    ]);
+    await Supabase.instance.client.from('sample').insert([
+      {
+        'i_id': 1,  // Replace with appropriate value
+        'signs_and_symptoms':signsAndSymptoms.text,
+        'allergies':allergies.text,
+        'medications':medications.text,
+        'post_medical_history':postMedicalHistory.text,
+        'last_meal':lastMeal.text,
+        'event_leading_for_cause':eventLeadingForCause.text,
+      }
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +142,7 @@ class _DisabilityPageState extends State<DisabilityPage> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             TextField(
-              controller: Allergies,
+              controller: allergies,
               decoration: InputDecoration(
                 hintText: 'Enter the allergies',
               ),
@@ -126,7 +153,7 @@ class _DisabilityPageState extends State<DisabilityPage> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             TextField(
-              controller: Medications,
+              controller: medications,
               decoration: InputDecoration(
                 hintText: 'Enter medications',
               ),
