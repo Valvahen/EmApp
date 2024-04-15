@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/circulation_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 class BreathingPage extends StatefulWidget {
   const BreathingPage({super.key});
 
@@ -16,6 +18,21 @@ class _BreathingPageState extends State<BreathingPage> {
   TextEditingController chestNeedleTubeController = TextEditingController();
 
   String selection = '';
+
+  void _submitDataToSupabase() async {
+    // Insert data into the 'mechanism' table
+    await Supabase.instance.client.from('airway').insert([
+      {
+        'i_id': 1, // Replace with appropriate value
+        //'spontaneous': selection == 'yes' ? 'yes' : 'no',
+        'breath_l': isLeft ? 'yes' : 'no',
+        'breath_r': isRight ? 'yes' : 'no',
+        'breath_rib': isRibBinder ? 'yes' : 'no',
+        'oxygen': oxygenController.text,
+        'object': chestNeedleTubeController.text,
+      }
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
