@@ -35,7 +35,6 @@ class _VitalsPageState extends State<VitalsPage> {
     // Insert data into the 'mechanism' table
     await Supabase.instance.client.from('vitals').insert([
       {
-        'i_id': 1, 
         'time': _timeController.text,
         'hr': _hrController.text,
         'rr': _rrController.text,
@@ -47,20 +46,17 @@ class _VitalsPageState extends State<VitalsPage> {
       }
     ]);
     await Supabase.instance.client.from('injuries').insert([
-      {
-        'i_id': 1, // Replace with appropriate value
+      { // Replace with appropriate value
         'injuries': _injurySustained.text,
       }
     ]);
     await Supabase.instance.client.from('requirements').insert([
       {
-        'i_id': 1, // Replace with appropriate value
         'requirements': _requirements.text,
       }
     ]);
     await Supabase.instance.client.from('timeofarr').insert([
       {
-        'i_id': 1, // Replace with appropriate value
         'EstimatedTimeOfArrival': _estimatedTimeOfArrival.text,
       }
     ]);
