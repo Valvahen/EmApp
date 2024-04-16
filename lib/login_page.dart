@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/detail_page.dart';
+import 'package:myapp/view_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -14,29 +15,21 @@ class _LoginPageState extends State<LoginPage> {
   String _username = '';
   String _password = '';
 
-  void _submitDataToSupabase() async {
-    // Insert data into the 'mechanism' table
-    await Supabase.instance.client.from('employee_data').insert([
-      {
-        'e_id': '12121',
-        'username': _username,
-        'password': _password,
-      }
-    ]);
-    await Supabase.instance.client.from('responder').insert([
-      {
-        'e_id':'12121',harshit
-      }
-    ]);
-  }
-
   void _login() {
     if (_formKey.currentState!.validate()) {
-      // Navigate to the new page after successful login
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => DetailsPage()),
-      );
+      if (_username == 'admin' && _password.isNotEmpty) {
+        // Navigate to view page if username is admin and password is not empty
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => ViewPage()),
+        );
+      } else {
+        // Navigate to detail page otherwise
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => DetailsPage()),
+        );
+      }
     }
   }
 
@@ -80,10 +73,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             ElevatedButton(
-              onPressed: () {
-                _login();
-                _submitDataToSupabase();
-              },
+              onPressed: _login,
               child: Text('Login'),
             ),
           ],
