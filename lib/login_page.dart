@@ -14,19 +14,19 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String _username = '';
   String _password = '';
-  
+
   void _submitDataToSupabase() async {
     // Insert data into the 'mechanism' table
     await Supabase.instance.client.from('employee_data').insert([
       {
-        'e_id': '12122',
+        'e_id': '12123',
         'username': _username,
         'password': _password,
       }
     ]);
     await Supabase.instance.client.from('responder').insert([
       {
-        'e_id':'12122',
+        'e_id':'12123',
       }
     ]);
   }
