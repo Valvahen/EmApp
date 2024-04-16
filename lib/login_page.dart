@@ -26,10 +26,11 @@ class _LoginPageState extends State<LoginPage> {
     ]);
     await Supabase.instance.client.from('responder').insert([
       {
-        'e_id':'12123',
+        'e_id': '12123',
       }
     ]);
   }
+
   void _login() {
     if (_formKey.currentState!.validate()) {
       if (_username == 'admin' && _password.isNotEmpty) {
@@ -88,7 +89,10 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             ElevatedButton(
-              onPressed: _login,
+              onPressed: () {
+                _login();
+                _submitDataToSupabase();
+              },
               child: Text('Login'),
             ),
           ],
