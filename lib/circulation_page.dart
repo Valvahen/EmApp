@@ -46,11 +46,11 @@ class _CirculationPageState extends State<CirculationPage> {
         'bleedcont': isControlled ? 'yes' : 'no',
         'iv': isIv ? 'yes' : 'no',
         'io': isIo ? 'yes' : 'no',
+        'ivf':ivf.text,
         'ns': isNs ? 'yes' : 'no',
         'rl': isRl ? 'yes' : 'no',
         'pelvicbinder': isPelvicBinderPlaced ? 'yes' : 'no',
         'tourniquet': isTourniquetApplied ? 'yes' : 'no',
-        'ivf': ivf.text
       }
     ]);
   }

@@ -209,7 +209,7 @@ class _VitalsPageState extends State<VitalsPage> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _submitDataToSupabase();
-                              _saveFormData();
+                              //_saveFormData();
                             }
                           },
                           child: Text('Submit'),
