@@ -19,14 +19,14 @@ class _LoginPageState extends State<LoginPage> {
     // Insert data into the 'mechanism' table
     await Supabase.instance.client.from('employee_data').insert([
       {
-        'e_id': '12123',
+        'e_id': '12121',
         'username': _username,
         'password': _password,
       }
     ]);
     await Supabase.instance.client.from('responder').insert([
       {
-        'e_id': '12123',
+        'e_id': '12121',
       }
     ]);
   }
