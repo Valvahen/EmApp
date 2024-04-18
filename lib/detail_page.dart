@@ -18,7 +18,7 @@ class _DetailsPageState extends State<DetailsPage> {
   void _submitDataToSupabase() async {
     // Get the text entered in the text field
     String otherText = otherTextFieldController.text.trim(); // Trim whitespace
-    String time = timeFieldController.text.trim(); // Trim whitespace
+    // Trim whitespace
 
     // Check if each checkbox is checked and set the corresponding value
     bool isHomeSelected = selectedCheckboxes.contains('Home');
@@ -29,12 +29,10 @@ class _DetailsPageState extends State<DetailsPage> {
     bool isStreetSelected = selectedCheckboxes.contains('Street/highway');
 
     // Log the length of the day value
-    print('Length of day value: ${time.length}');
 
     // Insert the data into the 'i_info' table
     await Supabase.instance.client.from('i_info').insert([
       {
-        'day': time,
         'home': isHomeSelected ? 'yes' : 'no',
         'health_facility': isHealthFacilitySelected ? 'yes' : 'no',
         'public_place': isPublicBuildingSelected ? 'yes' : 'no',
@@ -56,12 +54,6 @@ class _DetailsPageState extends State<DetailsPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Time text field
-          TextField(
-            controller: timeFieldController,
-            decoration: InputDecoration(
-              labelText: 'Enter time',
-            ),
-          ),
           // Checkboxes
           Column(
             children: [

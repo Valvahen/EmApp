@@ -48,6 +48,11 @@ class _VitalsPageState extends State<VitalsPage> {
         'requirements': _requirements.text,
       }
     ]);
+     await Supabase.instance.client.from('intervention').insert([
+      {
+        'intervention': _interventionPerformed.text,
+      }
+    ]);
     await Supabase.instance.client.from('timeofarr').insert([
       {
         'timeofarrival': _estimatedTimeOfArrival.text,
