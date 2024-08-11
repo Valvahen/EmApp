@@ -23,37 +23,36 @@ class _CirculationPageState extends State<CirculationPage> {
   bool isControlled = false;
   bool isIv = false;
   bool isIo = false;
+  bool isIvf = false;
   bool isNs = false;
   bool isRl = false;
   bool isPelvicBinderPlaced = false;
   bool isTourniquetApplied = false;
 
-  TextEditingController ivf = TextEditingController();
-
   void _submitDataToSupabase() async {
-    // Insert data into the 'mechanism' table
-    await Supabase.instance.client.from('circulation').insert([
-      {
-        'warmskin': isWarm ? 'yes' : 'no',
-        'paleskin': isPale ? 'yes' : 'no',
-        'cyanotic': isCyanotic ? 'yes' : 'no',
-        'cool': isCool ? 'yes' : 'no',
-        'crt': lessThan2 ? 'yes' : 'no',
-        'weak': isWeak ? 'yes' : 'no',
-        'thready': isThready ? 'yes' : 'no',
-        'bounding': isBounding ? 'yes' : 'no',
-        'jvd': isJvd ? 'yes' : 'no',
-        'bleedcont': isControlled ? 'yes' : 'no',
-        'iv': isIv ? 'yes' : 'no',
-        'io': isIo ? 'yes' : 'no',
-        'ivf':ivf.text,
-        'ns': isNs ? 'yes' : 'no',
-        'rl': isRl ? 'yes' : 'no',
-        'pelvicbinder': isPelvicBinderPlaced ? 'yes' : 'no',
-        'tourniquet': isTourniquetApplied ? 'yes' : 'no',
-      }
-    ]);
-  }
+          await Supabase.instance.client.from('circulation').insert([
+        {
+          'warmskin': isWarm ? 'yes' : 'no',
+          'paleskin': isPale ? 'yes' : 'no',
+          'cyanotic': isCyanotic ? 'yes' : 'no',
+          'cool': isCool ? 'yes' : 'no',
+          'crt': lessThan2 ? 'yes' : 'no',
+          'weak': isWeak ? 'yes' : 'no',
+          'thready': isThready ? 'yes' : 'no',
+          'bounding': isBounding ? 'yes' : 'no',
+          'jvd': isJvd ? 'yes' : 'no',
+          'bleedcont': isControlled ? 'yes' : 'no',
+          'iv': isIv ? 'yes' : 'no',
+          'io': isIo ? 'yes' : 'no',
+          'ivf': isIvf? 'yes' : 'no',
+          'ns': isNs ? 'yes' : 'no',
+          'rl': isRl ? 'yes' : 'no',
+          'pelvicbinder': isPelvicBinderPlaced ? 'yes' : 'no',
+          'tourniquet': isTourniquetApplied ? 'yes' : 'no',
+        }
+      ]);
+    }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -219,11 +218,15 @@ class _CirculationPageState extends State<CirculationPage> {
               'IVF:',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            TextField(
-              controller: ivf,
-              decoration: InputDecoration(
-                hintText: 'Enter text',
-              ),
+            CheckboxListTile(
+              title: Text('IVF'),
+              controlAffinity: ListTileControlAffinity.leading,
+              value: isIvf,
+              onChanged: (value) {
+                setState(() {
+                  isIvf = value!;
+                });
+              },
             ),
             CheckboxListTile(
               title: Text('NS'),

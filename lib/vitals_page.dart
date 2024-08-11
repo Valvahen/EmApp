@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:myapp/login_page.dart';
 
 class VitalsPage extends StatefulWidget {
   @override
@@ -214,6 +215,10 @@ class _VitalsPageState extends State<VitalsPage> {
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _submitDataToSupabase();
+                              Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginPage()));
                               //_saveFormData();
                             }
                           },

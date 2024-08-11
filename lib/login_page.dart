@@ -16,19 +16,22 @@ class _LoginPageState extends State<LoginPage> {
   String _password = '';
 
   void _submitDataToSupabase() async {
-    // Insert data into the 'mechanism' table
-    await Supabase.instance.client.from('employee_data').insert([
+    // Insert data into the 'responder' table
+    await Supabase.instance.client.from('responder').insert([
       {
-        'e_id': '12121',
         'username': _username,
         'password': _password,
       }
     ]);
-    await Supabase.instance.client.from('responder').insert([
-      {
-        'e_id': '12121',
-      }
-    ]);
+    // await Supabase.instance.client.from('i_info').insert([
+    //   {
+    //     'home': '-1',
+    //     'health_facility': '-1',
+    //     'public_place': '-1',
+    //     'street': '-1',
+    //     'others': '-1',
+    //   }
+    // ]);
   }
 
   void _login() {

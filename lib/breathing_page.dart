@@ -20,18 +20,22 @@ class _BreathingPageState extends State<BreathingPage> {
   String selection = '';
 
   void _submitDataToSupabase() async {
-    // Insert data into the 'mechanism' table
-    await Supabase.instance.client.from('breathing').insert([
-      {
-        'spontaneous': selection == 'yes' ? 'yes' : 'no',
-        'breath_l': isLeft ? 'yes' : 'no',
-        'breath_r': isRight ? 'yes' : 'no',
-        'rib_binder': isRibBinder ? 'yes' : 'no',
-        'oxygen': oxygenController.text,
-        'tube': chestNeedleTubeController.text,
-      }
-    ]);
-  }
+  String oxygentext = oxygenController.text.trim();
+  String chestNeedleTubeText = chestNeedleTubeController.text.trim();
+
+  // Insert data into the 'breathing' table
+  await Supabase.instance.client.from('breathing').insert([
+    {
+      'spontaneous': selection.isNotEmpty ? (selection == 'yes'? 'yes' : 'no') : 'no',
+      'breath_l': isLeft ? 'yes' : 'no',
+      'breath_r': isRight ? 'yes' : 'no',
+      'rib_binder': isRibBinder ? 'yes' : 'no',
+      'oxygen': oxygentext.isNotEmpty ? oxygentext : 'N/A',
+      'tube': chestNeedleTubeText.isNotEmpty ? chestNeedleTubeText : 'no',
+    }
+  ]);
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +66,7 @@ class _BreathingPageState extends State<BreathingPage> {
             ),
             ListTile(
               leading: Radio(
-                value: 'No',
+                value: "No",
                 groupValue: selection,
                 onChanged: (String? value) {
                   setState(() {
