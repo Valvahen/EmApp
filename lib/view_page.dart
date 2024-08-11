@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/login_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ViewPage extends StatefulWidget {
@@ -273,6 +274,14 @@ class _ViewPageState extends State<ViewPage> {
                 },
                 child: Text('Get Data'),
               ),
+              ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Text('Back to Login Page')),
               SizedBox(height: 10),
               for (final rowData in _breathingData)
                 Card(

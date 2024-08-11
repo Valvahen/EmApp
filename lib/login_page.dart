@@ -44,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
         );
       } else {
         // Navigate to detail page otherwise
+        _submitDataToSupabase();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => DetailsPage()),
@@ -94,7 +95,6 @@ class _LoginPageState extends State<LoginPage> {
             ElevatedButton(
               onPressed: () {
                 _login();
-                _submitDataToSupabase();
               },
               child: Text('Login'),
             ),
