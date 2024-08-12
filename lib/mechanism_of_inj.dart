@@ -283,6 +283,15 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
                 });
               },
             ),
+            CheckboxListTile(
+              title: Text('Ejected'),
+              value: ejected,
+              onChanged: (newValue) {
+                setState(() {
+                  ejected = newValue!;
+                });
+              },
+            ),
 
             // Add more CheckboxListTile for other options
 
@@ -317,18 +326,6 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
               decoration: InputDecoration(
                 hintText: 'Enter details',
               ),
-            ),
-
-            SizedBox(height: 20.0),
-
-            CheckboxListTile(
-              title: Text('Ejected'),
-              value: ejected,
-              onChanged: (newValue) {
-                setState(() {
-                  ejected = newValue!;
-                });
-              },
             ),
 
             SizedBox(height: 20.0),
