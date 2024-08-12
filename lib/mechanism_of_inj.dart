@@ -297,7 +297,7 @@ class _MechanismOfInjuryState extends State<MechanismOfInjury> {
 
             SizedBox(height: 20.0),
 
-            Text('Time:',
+            Text('Time of the accident:',
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
             TextField(
               controller: timeController,
