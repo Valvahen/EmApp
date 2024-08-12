@@ -29,7 +29,7 @@ class _massCasualtyPageState extends State<massCasualtyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mass Casualty'),
+        title: Text('No of Patients at Scene'),
       ),
       body: Center(
         child: Column(
