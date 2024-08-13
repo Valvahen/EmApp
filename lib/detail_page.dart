@@ -3,30 +3,39 @@ import 'package:myapp/mass_cas.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key});
-
+  final String username;
+  final String password;
+  const DetailsPage({
+    super.key,
+    required this.username,
+    required this.password,
+  });
   @override
   _DetailsPageState createState() => _DetailsPageState();
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  TimeOfDay selectedTime = TimeOfDay.now();
+  //TimeOfDay selectedTime = TimeOfDay.now();
   Set<String> selectedCheckboxes = {"Home"};
   TextEditingController otherTextFieldController = TextEditingController();
-  TextEditingController timeFieldController = TextEditingController();
-
+  //TextEditingController timeFieldController = TextEditingController();
+  bool isHomeSelected = false;
+  bool isHealthFacilitySelected = false;
+  bool isPublicBuildingSelected = false;
+  bool isStreetSelected = false;
+  //String otherText = "";
   void _submitDataToSupabase() async {
     // Get the text entered in the text field
-    String otherText = otherTextFieldController.text.trim(); // Trim whitespace
+    // Trim whitespace
     // Trim whitespace
 
     // Check if each checkbox is checked and set the corresponding value
-    bool isHomeSelected = selectedCheckboxes.contains('Home');
-    bool isHealthFacilitySelected =
-        selectedCheckboxes.contains('Health Care facility');
-    bool isPublicBuildingSelected =
-        selectedCheckboxes.contains('Public building');
-    bool isStreetSelected = selectedCheckboxes.contains('Street/highway');
+    // bool isHomeSelected = selectedCheckboxes.contains('Home');
+    // bool isHealthFacilitySelected =
+    //     selectedCheckboxes.contains('Health Care facility');
+    // bool isPublicBuildingSelected =
+    //     selectedCheckboxes.contains('Public building');
+    // bool isStreetSelected = selectedCheckboxes.contains('Street/highway');
 
     // Log the length of the day value
 
@@ -37,9 +46,9 @@ class _DetailsPageState extends State<DetailsPage> {
         'health_facility': isHealthFacilitySelected ? 'yes' : 'no',
         'public_place': isPublicBuildingSelected ? 'yes' : 'no',
         'street': isStreetSelected ? 'yes' : 'no',
-        'others': otherText.isNotEmpty
-            ? otherText
-            : 'N/A', // Use 'N/A' if otherText is empty
+        'others': otherTextFieldController.text.isNotEmpty
+            ? otherTextFieldController.text
+            : 'N/A',
       }
     ]);
   }
@@ -59,53 +68,37 @@ class _DetailsPageState extends State<DetailsPage> {
             children: [
               CheckboxListTile(
                 title: Text('Home'),
-                value: selectedCheckboxes.contains('Home'),
-                onChanged: (value) {
+                value: isHomeSelected,
+                onChanged: (newValue) {
                   setState(() {
-                    if (value!) {
-                      selectedCheckboxes.add('Home');
-                    } else {
-                      selectedCheckboxes.remove('Home');
-                    }
+                    isHomeSelected = newValue!;
                   });
                 },
               ),
               CheckboxListTile(
                 title: Text('Health Care facility'),
-                value: selectedCheckboxes.contains('Health Care facility'),
-                onChanged: (value) {
+                value: isHealthFacilitySelected,
+                onChanged: (newValue) {
                   setState(() {
-                    if (value!) {
-                      selectedCheckboxes.add('Health Care facility');
-                    } else {
-                      selectedCheckboxes.remove('Health Care facility');
-                    }
+                    isHealthFacilitySelected = newValue!;
                   });
                 },
               ),
               CheckboxListTile(
                 title: Text('Public building'),
-                value: selectedCheckboxes.contains('Public building'),
-                onChanged: (value) {
+                value: isPublicBuildingSelected,
+                onChanged: (newValue) {
                   setState(() {
-                    if (value!) {
-                      selectedCheckboxes.add('Public building');
-                    } else {
-                      selectedCheckboxes.remove('Public building');
-                    }
+                    isPublicBuildingSelected = newValue!;
                   });
                 },
               ),
               CheckboxListTile(
                 title: Text('Street/highway'),
-                value: selectedCheckboxes.contains('Street/highway'),
-                onChanged: (value) {
+                value: isStreetSelected,
+                onChanged: (newValue) {
                   setState(() {
-                    if (value!) {
-                      selectedCheckboxes.add('Street/highway');
-                    } else {
-                      selectedCheckboxes.remove('Street/highway');
-                    }
+                    isStreetSelected = newValue!;
                   });
                 },
               ),
@@ -124,8 +117,17 @@ class _DetailsPageState extends State<DetailsPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => massCasualtyPage()));
-                _submitDataToSupabase();
+                        builder: (context) => massCasualtyPage(
+                            username: widget.username,
+                            password: widget.password,
+                            home: isHomeSelected ? 'yes' : 'no',
+                            health_facility:
+                                isHealthFacilitySelected ? 'yes' : 'no',
+                            public_place:
+                                isPublicBuildingSelected ? 'yes' : 'no',
+                            street: isStreetSelected ? 'yes' : 'no',
+                            others: otherTextFieldController.text.isNotEmpty? otherTextFieldController.text: 'N/A')));
+                //_submitDataToSupabase();
               },
               child: Text('Next'))
         ],

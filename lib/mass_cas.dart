@@ -3,7 +3,23 @@ import 'package:myapp/mechanism_of_inj.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class massCasualtyPage extends StatefulWidget {
-  const massCasualtyPage({super.key});
+  final String username;
+  final String password;
+  final String home;
+  final String health_facility;
+  final String public_place;
+  final String street;
+  final String others;
+  const massCasualtyPage({
+    super.key,
+    required this.username,
+    required this.password,
+    required this.home,
+    required this.health_facility,
+    required this.public_place,
+    required this.street,
+    required this.others,
+    });
 
   @override
   _massCasualtyPageState createState() => _massCasualtyPageState();
@@ -111,8 +127,21 @@ class _massCasualtyPageState extends State<massCasualtyPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MechanismOfInjury()));
-                    _submitDataToSupabase();
+                            builder: (context) => MechanismOfInjury(
+                                  username:widget.username,
+                                  password:widget.password,
+                                  home:widget.home,
+                                  health_facility:widget.health_facility,
+                                  public_place:widget.public_place,
+                                  street:widget.street,
+                                  others:widget.others,
+                                  single: _selection == 'Single' ? 'yes' : 'no',
+                                  multiple:_selection == 'Multiple' ? 'yes' : 'no',
+                                  na: _selection == 'NA' ? 'yes' : 'no',
+                                  doa: _selection == 'Dead on arrival'? 'yes': 'no',
+                                  mass: _selection == 'Mass casualty'? 'yes': 'no',
+                                )));
+                    //_submitDataToSupabase();
                   },
                   child: Text('Next'),
                 ),

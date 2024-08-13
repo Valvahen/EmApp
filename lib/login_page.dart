@@ -44,10 +44,13 @@ class _LoginPageState extends State<LoginPage> {
         );
       } else {
         // Navigate to detail page otherwise
-        _submitDataToSupabase();
+        //_submitDataToSupabase();
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => DetailsPage()),
+          MaterialPageRoute(builder: (context) => DetailsPage(
+            username:_username,
+            password:_password,
+          )),
         );
       }
     }
