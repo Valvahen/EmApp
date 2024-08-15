@@ -1,0 +1,263 @@
+DROP FUNCTION IF EXISTS view_info(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_quantity(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_mechanism(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_airway(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_prevention(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_breathing(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_circulation(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_disability(responder.i_id%TYPE);  
+DROP FUNCTION IF EXISTS view_vitals(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_injuries(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_intervention(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_requirements(responder.i_id%TYPE); 
+DROP FUNCTION IF EXISTS view_timeofarr(responder.i_id%TYPE); 
+
+drop table i_info; 
+drop table i_quantity; 
+drop table mechanism; 
+drop table prevention; 
+drop table airway; 
+drop table breathing; 
+drop table circulation; 
+drop table disability; 
+drop table vitals; 
+drop table injuries; 
+drop table intervention; 
+drop table requirements; 
+drop table timeofarr; 
+drop table responder; 
+
+CREATE TABLE responder (  
+username varchar(20), 
+password varchar(20),
+time timestamp,
+i_id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+); 
+
+Create table i_info( 
+i_id bigint primary key generated always as identity, 
+time timestamp, 
+home varchar(3) CHECK (home IN ('yes', 'no')) DEFAULT '-1', 
+health_facility varchar(3) CHECK (health_facility IN ('yes', 'no')) , 
+public_place varchar(3) CHECK (public_place IN ('yes', 'no')) DEFAULT '-1', 
+street varchar(3) CHECK (street IN ('yes', 'no')) DEFAULT '-1', 
+others varchar(100) DEFAULT '-1'); 
+
+Create table i_quantity( 
+i_id bigint primary key generated always as identity, 
+single varchar(3) CHECK (single IN ('yes', 'no')) DEFAULT '-1', 
+multiple varchar(3) CHECK (multiple IN ('yes', 'no')) DEFAULT '-1', 
+na varchar(3) CHECK (na IN ('yes', 'no')) DEFAULT '-1', 
+doa varchar(3) CHECK (doa IN ('yes', 'no')) DEFAULT '-1', 
+mass varchar(3) CHECK (mass IN ('yes', 'no')) DEFAULT '-1'); 
+
+Create table mechanism( 
+i_id bigint primary key generated always as identity, 
+rta varchar(3) CHECK (rta IN ('yes', 'no')) DEFAULT '-1', 
+driver varchar(3) CHECK (driver IN ('yes', 'no')) DEFAULT '-1', 
+passenger varchar(3) CHECK (passenger IN ('yes', 'no')) DEFAULT '-1', 
+pedestrian varchar(3) CHECK (pedestrian IN ('yes', 'no')) DEFAULT '-1', 
+airbag varchar(3) CHECK (airbag IN ('yes', 'no')) DEFAULT '-1', 
+seatbelt varchar(3) CHECK (seatbelt IN ('yes', 'no')) DEFAULT '-1', 
+othervehi varchar(3) CHECK (othervehi IN ('yes', 'no')) DEFAULT '-1', 
+helmet varchar(3) CHECK (helmet IN ('yes', 'no')) DEFAULT '-1', 
+fall varchar(3) CHECK (fall IN ('yes', 'no')) DEFAULT '-1', 
+gun varchar(3) CHECK (gun IN ('yes', 'no')) DEFAULT '-1', 
+animal varchar(3) CHECK (animal IN ('yes', 'no')) DEFAULT '-1', 
+stab varchar(3) CHECK (stab IN ('yes', 'no')) DEFAULT '-1', 
+blunt varchar(3) CHECK (blunt IN ('yes', 'no')) DEFAULT '-1', 
+assault varchar(3) CHECK (assault IN ('yes', 'no')) DEFAULT '-1', 
+crushed varchar(3) CHECK (crushed IN ('yes', 'no')) DEFAULT '-1', 
+penetration varchar(3) CHECK (penetration IN ('yes', 'no')) DEFAULT '-1', 
+degloved varchar(3) CHECK (degloved IN ('yes', 'no')) DEFAULT '-1', 
+explosion varchar(3) CHECK (explosion IN ('yes', 'no')) DEFAULT '-1', 
+burns varchar(3) CHECK (burns IN ('yes', 'no')) DEFAULT '-1', 
+drowning varchar(3) CHECK (drowning IN ('yes', 'no')) DEFAULT '-1', 
+extricated varchar(3) CHECK (extricated IN ('yes', 'no')) DEFAULT '-1', 
+ejected varchar(3) CHECK (ejected IN ('yes', 'no')) DEFAULT '-1', 
+timeofa varchar(100) DEFAULT '-1',
+vehi_invol varchar(100) DEFAULT '-1', 
+crash_with varchar(100) DEFAULT '-1'); 
+
+Create table airway( 
+i_id bigint primary key generated always as identity, 
+patent varchar(3) CHECK (patent IN ('yes', 'no')) DEFAULT '-1', 
+threatened varchar(3) CHECK (threatened IN ('yes', 'no')) DEFAULT '-1', 
+obstructed varchar(3) CHECK (obstructed IN ('yes', 'no')) DEFAULT '-1', 
+object varchar(20) DEFAULT '-1'); 
+
+Create table prevention( 
+i_id bigint primary key generated always as identity, 
+head_tilt varchar(3) CHECK (head_tilt IN ('yes', 'no')) DEFAULT '-1', 
+jaw varchar(3) CHECK (jaw IN ('yes', 'no')) DEFAULT '-1', 
+collar varchar(3) CHECK (collar IN ('yes', 'no')) DEFAULT '-1', 
+suctioning varchar(3) CHECK (suctioning IN ('yes', 'no')) DEFAULT '-1'); 
+
+Create table breathing( 
+i_id bigint primary key generated always as identity, 
+spontaneous varchar(3) CHECK (spontaneous IN ('yes', 'no')) DEFAULT '-1', 
+breath_L varchar(100)  DEFAULT '-1', 
+breath_R varchar(100) DEFAULT '-1', 
+rib_binder varchar(3) CHECK (rib_binder IN ('yes', 'no')) DEFAULT '-1', 
+oxygen varchar(100) DEFAULT '-1', 
+tube varchar(100) DEFAULT '-1' ); 
+
+Create table circulation( 
+i_id bigint primary key generated always as identity, 
+warmskin varchar(3) CHECK (warmskin IN ('yes', 'no')) DEFAULT '-1', 
+paleskin varchar(3) CHECK (paleskin IN ('yes', 'no')) DEFAULT '-1', 
+cyanotic varchar(3) CHECK (cyanotic IN ('yes', 'no')) DEFAULT '-1', 
+cool varchar(3) CHECK (cool IN ('yes', 'no')) DEFAULT '-1', 
+crt varchar(3) CHECK (crt IN ('yes', 'no')) DEFAULT '-1', 
+weak varchar(3) CHECK (weak IN ('yes', 'no')) DEFAULT '-1', 
+thready varchar(3) CHECK (thready IN ('yes', 'no')) DEFAULT '-1', 
+bounding varchar(3) CHECK (bounding IN ('yes', 'no')) DEFAULT '-1', 
+jvd varchar(3) CHECK (jvd IN ('yes', 'no')) DEFAULT '-1', 
+bleedcont varchar(3) CHECK (bleedcont IN ('yes', 'no')) DEFAULT '-1', 
+iv varchar(3) CHECK (iv IN ('yes', 'no')) DEFAULT '-1', 
+io varchar(3) CHECK (io IN ('yes', 'no')) DEFAULT '-1', 
+ivf varchar(3) CHECK (ivf IN ('yes', 'no')) DEFAULT '-1', 
+ns varchar(3) CHECK (ns IN ('yes', 'no')) DEFAULT '-1', 
+rl varchar(3) CHECK (rl IN ('yes', 'no')) DEFAULT '-1', 
+pelvicbinder varchar(3) CHECK (pelvicbinder IN ('yes', 'no')) DEFAULT '-1', 
+tourniquet varchar(3) CHECK (tourniquet IN ('yes', 'no')) DEFAULT '-1'); 
+
+Create table disability( 
+i_id bigint primary key generated always as identity, 
+a varchar(3) CHECK (a IN ('yes', 'no')) DEFAULT '-1', 
+v varchar(3) CHECK (v IN ('yes', 'no')) DEFAULT '-1', 
+p varchar(3) CHECK (p IN ('yes', 'no')) DEFAULT '-1', 
+u varchar(3) CHECK (u IN ('yes', 'no')) DEFAULT '-1', 
+pupils varchar(100) DEFAULT '-1', 
+exposed varchar(3) CHECK (exposed IN ('yes', 'no')) DEFAULT '-1'); 
+
+Create table vitals( 
+i_id bigint primary key generated always as identity, 
+time varchar(100) DEFAULT '-1', 
+hr varchar(100) DEFAULT '-1', 
+rr varchar(100) DEFAULT '-1', 
+spo2 varchar(100) DEFAULT '-1', 
+bp varchar(100) DEFAULT '-1', 
+grbs varchar(100) DEFAULT '-1', 
+gcs varchar(100) DEFAULT '-1', 
+temp varchar(100) DEFAULT '-1'); 
+
+Create table injuries( 
+i_id bigint primary key generated always as identity, 
+injury varchar(100) DEFAULT '-1'); 
+
+create table intervention ( 
+i_id bigint primary key generated always as identity, 
+intervention varchar(100) DEFAULT '-1'); 
+
+Create table requirements( 
+i_id bigint primary key generated always as identity, 
+requirements varchar(100) DEFAULT '-1'); 
+
+Create table timeofarr( 
+i_id bigint primary key generated always as identity, 
+timeofarrival varchar(100) DEFAULT '-1'); 
+
+alter table i_info 
+add constraint fk_i_info_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table i_quantity 
+add constraint fk_i_quantity_responder 
+foreign key (i_id) references responder (i_id); 
+
+alter table mechanism 
+add constraint fk_mechanism_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table prevention 
+add constraint fk_prevention_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table airway 
+add constraint fk_airway_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table breathing 
+add constraint fk_breathing_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table circulation 
+add constraint fk_circulation_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table disability 
+add constraint fk_disability_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table vitals 
+add constraint fk_vitals_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table injuries 
+add constraint fk_injuries_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table intervention 
+add constraint fk_intervention_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table requirements 
+add constraint fk_requirements_responder 
+foreign key (i_id) references responder (i_id); 
+
+ alter table timeofarr 
+add constraint fk_timeofarr_responder 
+foreign key (i_id) references responder (i_id); 
+
+
+Create or replace function view_info (id responder.i_id%TYPE) returns setof i_info as $$ BEGIN RETURN QUERY SELECT * FROM i_info where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_quantity (id responder.i_id%TYPE) returns setof i_quantity as $$ BEGIN RETURN QUERY SELECT * FROM i_quantity where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_mechanism (id responder.i_id%TYPE) returns setof mechanism as $$ BEGIN RETURN QUERY SELECT * FROM mechanism where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_airway (id responder.i_id%TYPE) returns setof airway as $$ BEGIN RETURN QUERY SELECT * FROM airway where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_prevention (id responder.i_id%TYPE) returns setof prevention as $$ BEGIN RETURN QUERY SELECT * FROM prevention where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_breathing (id responder.i_id%TYPE) returns setof breathing as $$ BEGIN RETURN QUERY SELECT * FROM breathing where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_circulation (id responder.i_id%TYPE) returns setof circulation as $$ BEGIN RETURN QUERY SELECT * FROM circulation where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_disability (id responder.i_id%TYPE) returns setof disability as $$ BEGIN RETURN QUERY SELECT * FROM disability where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_vitals (id responder.i_id%TYPE) returns setof vitals as $$ BEGIN RETURN QUERY SELECT * FROM vitals where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_injuries (id responder.i_id%TYPE) returns setof injuries as $$ BEGIN RETURN QUERY SELECT * FROM injuries where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_intervention (id responder.i_id%TYPE) returns setof intervention as $$ BEGIN RETURN QUERY SELECT * FROM intervention where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_requirements (id responder.i_id%TYPE) returns setof requirements as $$ BEGIN RETURN QUERY SELECT * FROM requirements where i_id=id; END; $$ language plpgsql; 
+
+Create or replace function view_timeofarr (id responder.i_id%TYPE) returns setof timeofarr as $$ BEGIN RETURN QUERY SELECT * FROM timeofarr where i_id=id; END; $$ language plpgsql; 
+
+CREATE OR REPLACE FUNCTION update_timestamp() 
+RETURNS TRIGGER AS $$ 
+BEGIN 
+    SET TIME ZONE 'Asia/Kolkata'; 
+    NEW.time := to_char(CURRENT_TIMESTAMP, 'HH24:MI DD/MM/YYYY'); 
+    RETURN NEW; 
+END; 
+$$ LANGUAGE plpgsql;
+
+ALTER TABLE i_info 
+ALTER COLUMN time TYPE VARCHAR(20);
+
+ALTER TABLE responder 
+ALTER COLUMN time TYPE VARCHAR(20);
+
+CREATE TRIGGER time_trigger 
+BEFORE INSERT OR UPDATE ON i_info 
+FOR EACH ROW 
+EXECUTE FUNCTION update_timestamp(); 
+
+CREATE TRIGGER time_trigger_2
+BEFORE INSERT OR UPDATE ON responder
+FOR EACH ROW 
+EXECUTE FUNCTION update_timestamp(); 
